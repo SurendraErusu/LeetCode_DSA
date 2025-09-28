@@ -21,6 +21,7 @@ public:
         }
         helper(root->right, level, depth+1);
         helper(root->left, level, depth+1);
+        return;
     }
     vector<int> rightSideView(TreeNode* root) {
         vector<int> level;
