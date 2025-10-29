@@ -1,23 +1,16 @@
 class Solution {
 public:
     int change(int amount, vector<int>& coins) {
-        int n = coins.size();
-        sort(coins.begin(), coins.end());
-        vector<vector<uint>> dp(n + 1, vector<uint>(amount + 1, 0));
+        vector<long long> dp(amount + 1, 0);
+        dp[0] = 1;  // one way to make 0 amount — take nothing
 
-        for (int i = 0; i <= n; i++) {
-            dp[i][0] = 1;
-        }
-
-        for (int i = n - 1; i >= 0; i--) {
-            for (int a = 0; a <= amount; a++) {
-                if (a >= coins[i]) {
-                    dp[i][a] = dp[i + 1][a];
-                    dp[i][a] += dp[i][a - coins[i]];
-                }
+        for (int coin : coins) {
+            for (int j = coin; j <= amount; j++) {
+                dp[j] += dp[j - coin];
+                if (dp[j] > INT_MAX) dp[j] = INT_MAX; // prevent overflow
             }
         }
 
-        return dp[0][amount];
+        return dp[amount];
     }
 };
