@@ -1,28 +1,26 @@
 class Solution {
 public:
+    void helper(vector<int>& nums, vector<vector<int>> &res, vector<int> &arr, 
+    int target, int i) {
+        if (i == nums.size()) {
+            if (target == 0) {
+                res.push_back(arr);
+            }
+            return;
+        }
 
-    void helperCombinationSum (vector<int>& candidates, int target,
-    vector<vector<int>> &res, vector<int> &arr, int ind) {
-        if (target == 0) {
-            res.push_back(arr);
-            return;
-        }
-        if (ind == candidates.size()) {
-            return;
-        }
-        if (target>=candidates[ind]) {
-            arr.push_back(candidates[ind]);
-            helperCombinationSum(candidates, target-candidates[ind], res, arr, 
-            ind);
+        if (nums[i] <= target) {
+            arr.push_back(nums[i]);
+            helper(nums, res, arr, target-nums[i], i);
             arr.pop_back();
         }
-        helperCombinationSum(candidates, target, res, arr, ind+1);
+        helper(nums, res, arr, target, i+1);
     }
 
     vector<vector<int>> combinationSum(vector<int>& candidates, int target) {
         vector<vector<int>> res;
         vector<int> arr;
-        helperCombinationSum(candidates, target, res, arr, 0);
+        helper(candidates, res, arr, target, 0);
         return res;
     }
 };
