@@ -1,21 +1,19 @@
 class Solution {
 public:
-    void subsetHelper(vector<vector<int>> &res, vector<int> &arr, vector<int>& 
-    nums, int ind) {
-        if (ind == nums.size()) {
+    void helper (vector<int>& nums, vector<vector<int>> &res, vector<int> &arr, int i) {
+        if (i == nums.size()) {
             res.push_back(arr);
             return;
         }
-        arr.push_back(nums[ind]);
-        subsetHelper(res, arr, nums, ind+1);
+        arr.push_back(nums[i]);
+        helper(nums, res, arr, i+1);
         arr.pop_back();
-        subsetHelper(res, arr, nums, ind+1);
+        helper(nums, res, arr, i+1);
     }
-
     vector<vector<int>> subsets(vector<int>& nums) {
-        vector<vector<int>> res;
-        vector<int> arr;
-        subsetHelper(res,arr,nums,0);
-        return res;
+    vector<vector<int>> res;
+    vector<int> arr;
+    helper(nums, res, arr, 0);
+    return res;
     }
 };
