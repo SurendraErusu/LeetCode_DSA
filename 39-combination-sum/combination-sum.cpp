@@ -2,13 +2,13 @@ class Solution {
 public:
     void helper(vector<int>& nums, vector<vector<int>> &res, vector<int> &arr, 
     int target, int i) {
-        if (i == nums.size()) {
-            if (target == 0) {
+        if (target == 0) {
                 res.push_back(arr);
+                return;
             }
+        if (i == nums.size()) {
             return;
         }
-
         if (nums[i] <= target) {
             arr.push_back(nums[i]);
             helper(nums, res, arr, target-nums[i], i);
