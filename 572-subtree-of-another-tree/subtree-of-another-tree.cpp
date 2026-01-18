@@ -31,10 +31,8 @@ public:
         if (root == NULL) {
             return false;
         }
-        if (root-> val == subRoot->val) {
         if (isSametree(root, subRoot)) {
             return true;
-        }
         }
         return isSubtree(root->left, subRoot) || isSubtree(root->right, subRoot);
     }
