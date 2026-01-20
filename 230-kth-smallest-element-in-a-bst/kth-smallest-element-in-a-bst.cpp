@@ -12,7 +12,7 @@
 class Solution {
 public:
     void helper(TreeNode* root, int k, int &ans, int &count) {
-        if (root == NULL) {
+        if (root == NULL || count > k) {
             return;
         }
         helper(root->left, k, ans, count);
